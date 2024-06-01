@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1717251041745,
+      "tag": "0000_swift_lord_hawal",
+      "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1717259462525,
+      "tag": "0001_salty_spot",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1717259916271,
+      "tag": "0002_worthless_lady_ursula",
+      "breakpoints": false
+    }
+  ]
+}
