@@ -1,0 +1,37 @@
+{
+  "name": "role-base-authentication",
+  "version": "1.0.0",
+  "description": "## Table of Contents 1. [Project Planning and Methodology](#project-planning-and-methodology)     1. [Agile Methodology](#agile-methodology)     2. [Planning Links](#planning-links) 2. [Features](#features) 3. [Techstack & Libraries Used](#techstack--libraries-used) 4. [Data Structure](#data-structure) 5. [Data Flow](#data-flow) 6. [Video Structure](#video-structure) 7. [Helpful Files](#helpful-files) 8. [Tips](#tips) 9. [Commands to Run the Project](#commands-to-run-the-project)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/index.js",
+    "start": "node  dist/index.js ",
+    "dev:tsc": "tsc --watch --preserveWatchOutput",
+    "dev:node": "node --watch dist/index.js",
+    "dev:esbuild": "pnpm run build --watch",
+    "dev": "run-p dev:*",
+    "migrate": "drizzle-kit generate:pg"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.13.0",
+    "@types/pg": "^8.11.6",
+    "esbuild": "^0.21.4",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.31.0",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "pg": "^8.11.5",
+    "pino": "^9.1.0",
+    "pino-pretty": "^11.1.0",
+    "zod": "^3.23.8"
+  }
+}
