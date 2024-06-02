@@ -1,6 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { createApplicationController, getApplicationController } from '../controller/application/application.controller';
+import { createUserController } from '../controller/user/user.controller';
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.get('/api/applications', getApplicationController);
 
 
 // User Routes
+router.post('/api/user', createUserController); 
 // Auth Routes
 
 

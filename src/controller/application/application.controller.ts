@@ -6,6 +6,8 @@ import {
   getApplications,
 } from "../../services/application/application.service";
 import { ZodError } from "zod";
+import { createRole } from "../../services/role/role.service";
+import { ALL_PERMISSIONS, SYSTEM_ROLES, USER_ROLE_PERMISSIONS } from "../../config/permissions";
 
 export async function createApplicationController(req: Request, res: Response) {
   try {
@@ -13,7 +15,24 @@ export async function createApplicationController(req: Request, res: Response) {
 
     const application = await createApplication({ name, description });
 
-    return res.status(201).json({ status: true, data: application });
+    if(!application) throw new Error("Application not created");
+   const superAdminRolePromise = await createRole({
+      name:SYSTEM_ROLES.SUPER_ADMIN,
+      applicationId: application.id,
+      permissions: ALL_PERMISSIONS as unknown as Array<string>,
+    })
+ const applicationUserRolePromise=   await createRole({
+      name:SYSTEM_ROLES.APPLICATION_USER,
+      applicationId: application.id,
+      permissions: USER_ROLE_PERMISSIONS,
+    }) 
+
+    const [superAdminRole, applicationUserRole] = await Promise.allSettled([superAdminRolePromise, applicationUserRolePromise]);
+
+    if(superAdminRole.status==="rejected") throw new Error("Error creating super admin role");
+    if(applicationUserRole.status==="rejected") throw new Error("Error creating application user role");
+    
+    return res.status(201).json({ status: true, data: {application,superAdminRole:superAdminRole.value,applicationUserRole:applicationUserRole.value} });
   } catch (error) {
     if (error instanceof ZodError) {
       const errorMessages = error.errors.map((issue) => issue.message);
