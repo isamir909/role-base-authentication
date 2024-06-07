@@ -9,6 +9,7 @@ const envSchema = z.object({
     PORT: z.preprocess((val) => Number(val), z.number().default(8000).optional()),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development').optional(),
     DATABASE_URL: z.string().trim().min(1),
+    JWT_SECRET: z.string().trim().min(1),
 });
 
 
@@ -32,4 +33,4 @@ try {
 }
 
 // Export the validated environment variables
-export const {  PORT, NODE_ENV, DATABASE_URL } = env;
+export const {  PORT, NODE_ENV, DATABASE_URL,JWT_SECRET } = env;
